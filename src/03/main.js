@@ -1,20 +1,16 @@
-(function(){
+(function () {
 
     const root = document.documentElement;
-    const spacingRange = document.getElementById('spacing');
-    const baseRange = document.getElementById('base');
-    const blurRange = document.getElementById('blur');
-    
-    spacingRange.addEventListener('input', () => {
-        root.style.setProperty('--spacing', spacingRange.value + 'px');
-    });
+    const controls = document.querySelectorAll('.controls input');
 
-    blurRange.addEventListener('input', () => {
-        root.style.setProperty('--blur', blurRange.value + 'px');
-    });
+    function updateControlValue() {
+        const variableName = this.name;
+        const variableSize = this.dataset.sizing || '';
+        const value = this.value + variableSize;
 
-    baseRange.addEventListener('input', () => {
-        root.style.setProperty('--base', baseRange.value);
-    });
+        root.style.setProperty(`--${variableName}`, value);
+    }
+
+    controls.forEach((control) => control.addEventListener('input', updateControlValue));
 
 }());
