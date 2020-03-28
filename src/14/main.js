@@ -1,0 +1,55 @@
+(function () {
+    // start with strings, numbers and booleans
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+
+    // You might think we can just do something like this:
+    const copyPlayer = players;
+    // however what happens when we update that array?
+
+    // now here is the problem!
+    copyPlayer.push('Test');
+    console.log(players);
+    console.log(copyPlayer);
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+    const copyPlayers2 = players.slice();
+    
+    // or create a new array and concat the old one in
+    const copyPlayers3 = [].concat(players);
+
+    // or use the new ES6 Spread
+    const copyPlayers4 = [...players];
+
+    const copyPlayers5 = Array.from(players);
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+        name: 'Wes Bos',
+        age: 80
+    };
+
+    // and think we make a copy:
+    const badCopyPerson = person;
+
+    // how do we take a copy instead?
+    const copyPerson = Object.assign({}, person);
+
+    // We will hopefully soon see the object ...spread
+    const copyPerson1 = {...copyPerson};
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+}())
