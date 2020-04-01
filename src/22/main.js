@@ -14,7 +14,7 @@
             width: linkPositions.width,
             height: linkPositions.height,
             top: linkPositions.top + window.scrollY,
-            left = linkPositions.left + window.scrollX
+            left: linkPositions.left + window.scrollX
         }
 
         highlight.style.transform = `translateY(${coords.top}px) translateX(${coords.left}px)`;
