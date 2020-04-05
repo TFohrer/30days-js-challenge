@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+</style>
+
+<button></button>
+<script>
+
+  const divs = document.querySelectorAll('div');
+
+  function logClass(){
+    console.log(this.classList.value);
+  }
+
+  // Event Bubbling --> inside out (three, two, one) // run the function on the way down the DOM (capture: false --> default)
+  divs.forEach(div => div.addEventListener('click', logClass));
+
+  // Event Capture --> outside to inside (one, two, three) // run the function on the way down the DOM
+  divs.forEach(div => div.addEventListener('click', logClass, {
+    capture: true,
+    // run only once
+    once:true
+  }));
+
+// stop propagation
+  divs.forEach(div => div.addEventListener('click', (e) => {
+    console.log('-- stop propagation --');
+    e.stopPropagation(); // stop bubbling up
+    logClass.bind(this);
+  }));
+
+</script>
+</body>
+</html>
